@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master own-release ]
   pull_request:
 
 jobs:
@@ -36,9 +36,9 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
-        tags: macbre/nginx
+        tags: yonggan/nginx
         cache-from: |
-          ghcr.io/macbre/nginx-http3:latest
+          ghcr.io/yonggan/nginx-http3:latest
 
     - name: Inspect images
       run: |
@@ -46,7 +46,7 @@ jobs:
 
     - name: Run nginx -V
       run: |
-        docker run -t macbre/nginx nginx -V | sed 's/\-\-/\n\t--/g' | tee
+        docker run -t yonggan/nginx nginx -V | sed 's/\-\-/\n\t--/g' | tee
 
     - name: Serve a static asset
       run: |

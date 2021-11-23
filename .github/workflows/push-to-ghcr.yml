@@ -3,12 +3,13 @@ on:
 
   # publish on releases (tagged as "x.y.z" - "v" prefix is removed)
   release:
-    types: [ published ]
+    types: [ published own-release ]
 
   # publish on pushes to the main branch (tagged as "master")
   push:
     branches:
       - master
+      - own-release
 
 jobs:
   docker_publish:
@@ -21,6 +22,6 @@ jobs:
       - name: Build and publish a Docker image for macbre/nginx-http3
         uses: macbre/push-to-ghcr@v7
         with:
-          image_name: macbre/nginx-http3
+          image_name: yonggan/nginx-http3
           github_token: ${{ secrets.GITHUB_TOKEN }}
           docker_io_token: ${{ secrets.DOCKER_IO_ACCESS_TOKEN }}
