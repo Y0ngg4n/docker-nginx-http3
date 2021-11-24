@@ -1,9 +1,16 @@
 name: Docker Image CI
 
 on:
+
+  # publish on releases (tagged as "x.y.z" - "v" prefix is removed)
+  release:
+    types: [ published own-release ]
+
+  # publish on pushes to the main branch (tagged as "master")
   push:
-    branches: [ master own-release ]
-  pull_request:
+    branches:
+      - master
+      - own-release
 
 jobs:
 
