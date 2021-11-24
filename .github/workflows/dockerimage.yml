@@ -42,9 +42,9 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
-        tags: yonggan/nginx
-        cache-from: |
-          ghcr.io/yonggan/nginx-http3:latest
+        tags: yonggan/nginx-http3
+    #    cache-from: |
+    #      ghcr.io/yonggan/nginx-http3:latest
 
     - name: Inspect images
       run: |
