@@ -37,14 +37,16 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-    # https://github.com/marketplace/actions/build-and-push-docker-images
-    - name: Build the Docker image
+    - name: Build and push
+      id: docker_build
       uses: docker/build-push-action@v2
       with:
-        context: .
-        tags: yonggan/nginx-http3
-    #    cache-from: |
-    #      ghcr.io/yonggan/nginx-http3:latest
+        context: ./
+        file: ./Dockerfile
+        push: true
+        tags: yonggan/volt_campaigner_backend:latest
+    - name: Image digest
+      run: echo ${{ steps.docker_build.outputs.digest }}
 
     - name: Inspect images
       run: |
